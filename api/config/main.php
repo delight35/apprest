@@ -52,7 +52,7 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
-        ],
+        ],                     
         'session' => [
             // this is the name of the session cookie used for login on the api
             'name' => 'advanced-api',
@@ -71,16 +71,19 @@ return [
         ],
         'urlManager' => [
             //'class' => 'yii\web\UrlManager',
-            //'enableStrictParsing' => true,
-            'enablePrettyUrl' => true,            
+            'enablePrettyUrl' => true,
+            'enableStrictParsing' => false,
             'showScriptName' => false,
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['/v1/post' => 'v1/post'],
+                    'controller' => ['v1/post'],
                      // Запретить методы:
                     'except' => ['create', 'update', 'delete', 'options'],
-                    // 'pluralize' => false, // TODO : не работает
+                    'pluralize' => true, // TODO : не работает
+                    /*'tokens' => [
+                        '{id}' => '<id:\\d+>'
+                    ]*/                 
                 ]
             ],
         ],

@@ -3,9 +3,10 @@
 namespace api\modules\v1\controllers;
 
 use api\controllers\BaseApiController;
+use api\modules\v1\resources\PostResource;
 
 class PostController extends BaseApiController
 {
-    public $modelClass = 'api\modules\v1\resources\PostResource';
+    public $modelClass = PostResource::class;
 }
 
