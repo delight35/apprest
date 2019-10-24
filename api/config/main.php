@@ -25,6 +25,29 @@ return [
                 'application/json' => 'yii\web\JsonParser'
             ]
         ],
+        'response' => [
+            'class' => 'yii\web\Response',
+            'format' => 'json',
+            'on beforeSend' => function ($event) {
+                $response = $event->sender;
+                //if ($response->data !== null && !empty(Yii::$app->request->get('suppress_response_code'))) {\
+                if ($response->isSuccessful) {
+                    $response->data = [
+                        'status' => 'Success',
+                        'message' => 'Успешно',
+                        'data' => $response->data,
+                    ];
+                    $response->statusCode = 200;
+                } else {
+                    $response->data = [
+                        'status' => 'GeneralInternalError',
+                        'message' => 'Произошла ошибка',
+                        'data' => [],
+                    ];                    
+                    $response->statusCode = 500;
+                }
+            },
+        ],        
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
