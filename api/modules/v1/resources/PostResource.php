@@ -14,11 +14,11 @@ class PostResource extends Post
             'id' => '_id',            
             'organisation' => function (Post $model)
             {
-                return $model->organisation;
+                return new OrganisationResource($model->organisation);
             },
             'place' => function (Post $model)
             {
-                return $model->place;
+                return new PlaceResource($model->place);
             },
             'text',
             'rating',                    
